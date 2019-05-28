@@ -19,6 +19,9 @@ public interface WorkoutSessionElementDao {
     @Delete
     void delete(WorkoutSessionElement element);
 
+    @Query("DELETE FROM workout_session_element WHERE workoutSessionID = :workoutSessionID")
+    void deleteAllWorkoutSessionElements(int workoutSessionID);
+
     @Query("SELECT * FROM workout_session_element WHERE workoutSessionID = :workoutSessionID ORDER BY position ASC")
-    LiveData<List<WorkoutSessionElement>> getAllSessionElements(int workoutSessionID);
+    List<WorkoutSessionElement> getAllSessionElements(int workoutSessionID);
 }
