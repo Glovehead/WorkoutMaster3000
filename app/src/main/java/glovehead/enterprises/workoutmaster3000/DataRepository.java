@@ -22,6 +22,7 @@ public class DataRepository {
     private WorkoutSessionElementDao workoutSessionElementDao;
 
     private LiveData<List<WorkoutSessionPlan>> allWorkoutSessionPlans;
+    private LiveData<WorkoutSessionPlan> activeWorkoutSessionPlan;
 
     public DataRepository(Application application) {
         AppDatabase db = AppDatabase.getInstance(application);
@@ -30,12 +31,17 @@ public class DataRepository {
         workoutSessionElementDao = db.workoutSessionElementDao();
 
         allWorkoutSessionPlans = workoutSessionPlanDao.getAllWorkoutSessionPlans();
+        activeWorkoutSessionPlan = workoutSessionPlanDao.getActiveWorkoutSessionPlan();
     }
 
     // WorkoutSessionPlans
 
     public LiveData<List<WorkoutSessionPlan>> getAllWorkoutSessionPlans() {
         return allWorkoutSessionPlans;
+    }
+
+    public LiveData<WorkoutSessionPlan> getActiveWorkoutSessionPlan() {
+        return activeWorkoutSessionPlan;
     }
 
     public void insertWorkoutSessionPlan(WorkoutSessionPlan plan) {

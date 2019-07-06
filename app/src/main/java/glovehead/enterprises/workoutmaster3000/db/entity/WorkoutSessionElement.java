@@ -24,10 +24,16 @@ public class WorkoutSessionElement {
 
     private int position;
 
-    public WorkoutSessionElement(int workoutSessionID, int exerciseTypeID, int position) {
+    private long duration;
+
+    private String durationString;
+
+    public WorkoutSessionElement(int workoutSessionID, int exerciseTypeID, int position, long duration, String durationString) {
         this.workoutSessionID = workoutSessionID;
         this.exerciseTypeID = exerciseTypeID;
         this.position = position;
+        this.duration = duration;
+        this.durationString = durationString;
     }
 
     public void setElementID(int elementID) {
@@ -48,5 +54,11 @@ public class WorkoutSessionElement {
 
     public int getPosition() {
         return position;
+    }
+
+    public long getDuration() {return duration;}
+
+    public String getDurationString() {
+        return durationString;
     }
 }
