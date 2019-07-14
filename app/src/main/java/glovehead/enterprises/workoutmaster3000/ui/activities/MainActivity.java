@@ -1,4 +1,4 @@
-package glovehead.enterprises.workoutmaster3000.ui;
+package glovehead.enterprises.workoutmaster3000.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import glovehead.enterprises.workoutmaster3000.R;
 import glovehead.enterprises.workoutmaster3000.db.entity.WorkoutSessionPlan;
+import glovehead.enterprises.workoutmaster3000.ui.adapters.WorkoutPlanSelectorAdapter;
 import glovehead.enterprises.workoutmaster3000.viewmodels.MainActivityViewModel;
 
 public class MainActivity extends AppCompatActivity {

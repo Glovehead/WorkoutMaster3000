@@ -1,4 +1,4 @@
-package glovehead.enterprises.workoutmaster3000.ui;
+package glovehead.enterprises.workoutmaster3000.ui.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;

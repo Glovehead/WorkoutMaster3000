@@ -1,4 +1,4 @@
-package glovehead.enterprises.workoutmaster3000.ui;
+package glovehead.enterprises.workoutmaster3000.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
