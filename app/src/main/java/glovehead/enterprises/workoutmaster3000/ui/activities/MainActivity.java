@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,7 +18,7 @@ import glovehead.enterprises.workoutmaster3000.db.entity.WorkoutSessionPlan;
 import glovehead.enterprises.workoutmaster3000.viewmodels.MainActivityViewModel;
 
 public class MainActivity extends AppCompatActivity {
-
+    private static final String TAG = "MainActivity";
     private MainActivityViewModel viewModel;
     private Button startWorkoutBtn;
     private CardView activeWorkoutCV;
@@ -70,10 +71,12 @@ public class MainActivity extends AppCompatActivity {
         startWorkoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, InProgressWorkoutActivity.class);
-                intent.putExtra(Constants.EXTRA_WORKOUT_ID, viewModel.getActiveWorkoutSessionPlan().getValue().getId());
+                if (viewModel.getActiveWorkoutSessionPlan().getValue() != null) {
+                    Intent intent = new Intent(MainActivity.this, InProgressWorkoutActivity.class);
+                    intent.putExtra(Constants.EXTRA_WORKOUT_ID, viewModel.getActiveWorkoutSessionPlan().getValue().getId());
 
-                startActivity(intent);
+                    startActivity(intent);
+                }
             }
         });
     }
