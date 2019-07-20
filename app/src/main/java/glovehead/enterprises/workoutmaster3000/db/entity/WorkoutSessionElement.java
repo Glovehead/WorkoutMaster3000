@@ -6,10 +6,10 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "workout_session_element",
         foreignKeys = {
-            @ForeignKey(entity = WorkoutSessionPlan.class,
+                @ForeignKey(entity = WorkoutSessionPlan.class,
                         parentColumns = "id",
                         childColumns = "workoutSessionID"),
-            @ForeignKey(entity = ExerciseType.class,
+                @ForeignKey(entity = ExerciseType.class,
                         parentColumns = "id",
                         childColumns = "exerciseTypeID")
         })
@@ -22,15 +22,18 @@ public class WorkoutSessionElement {
 
     private int exerciseTypeID;
 
+    private String exerciseType;
+
     private int position;
 
     private long duration;
 
     private String durationString;
 
-    public WorkoutSessionElement(int workoutSessionID, int exerciseTypeID, int position, long duration, String durationString) {
+    public WorkoutSessionElement(int workoutSessionID, int exerciseTypeID, String exerciseType, int position, long duration, String durationString) {
         this.workoutSessionID = workoutSessionID;
         this.exerciseTypeID = exerciseTypeID;
+        this.exerciseType = exerciseType;
         this.position = position;
         this.duration = duration;
         this.durationString = durationString;
@@ -56,9 +59,15 @@ public class WorkoutSessionElement {
         return position;
     }
 
-    public long getDuration() {return duration;}
+    public long getDuration() {
+        return duration;
+    }
 
     public String getDurationString() {
         return durationString;
+    }
+
+    public String getExerciseType() {
+        return exerciseType;
     }
 }
