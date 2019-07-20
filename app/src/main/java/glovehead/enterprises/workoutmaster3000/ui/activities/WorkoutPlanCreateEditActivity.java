@@ -5,9 +5,12 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class WorkoutPlannerActivity extends AppCompatActivity {
+import glovehead.enterprises.workoutmaster3000.R;
+
+public class WorkoutPlanCreateEditActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_workout_plan_creation);
     }
 }
