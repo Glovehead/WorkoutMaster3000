@@ -19,6 +19,7 @@ import glovehead.enterprises.workoutmaster3000.viewmodels.MainActivityViewModel;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
+
     private MainActivityViewModel viewModel;
     private Button startWorkoutBtn;
     private CardView activeWorkoutCV;

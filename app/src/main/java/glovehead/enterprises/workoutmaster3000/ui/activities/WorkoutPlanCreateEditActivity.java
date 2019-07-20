@@ -11,6 +11,6 @@ public class WorkoutPlanCreateEditActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_workout_plan_creation);
+        setContentView(R.layout.activity_workout_plan_create_edit);
     }
 }

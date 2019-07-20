@@ -15,6 +15,9 @@ public class DataGenerator extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... voids) {
+        // rest
+        exerciseTypeDao.insert(new ExerciseType("Rest", 0, 0, 0));
+
         // walk
         // lo = 4kmh, mid = 4.8kmh, hi = 5.6kmh
         exerciseTypeDao.insert(new ExerciseType("Walk", 0.0667, 0.0889, 0.1 ));
@@ -30,9 +33,6 @@ public class DataGenerator extends AsyncTask<Void, Void, Void> {
         // mid: 110 cal per 30 minutes (0.061111 cal/s)
         // hi: 130 cal per 30 minutes (0.072222 cal/s)
         exerciseTypeDao.insert(new ExerciseType("Weights", 0.05, 0.061111, 0.061111));
-
-        // rest
-        exerciseTypeDao.insert(new ExerciseType("Rest", 0, 0, 0));
 
         return null;
     }
