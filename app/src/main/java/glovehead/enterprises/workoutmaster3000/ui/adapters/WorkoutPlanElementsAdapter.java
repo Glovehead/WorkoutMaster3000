@@ -32,12 +32,6 @@ public class WorkoutPlanElementsAdapter extends RecyclerView.Adapter<WorkoutPlan
         if (currentElement != null) {
             holder.elementType.setText(currentElement.getExerciseType());
             holder.elementDuration.setText(currentElement.getDurationString());
-            holder.elementEditBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
         } else {
             holder.elementType.setText("-");
             holder.elementDuration.setText("--:--");
@@ -59,13 +53,11 @@ public class WorkoutPlanElementsAdapter extends RecyclerView.Adapter<WorkoutPlan
 
         private TextView elementType;
         private TextView elementDuration;
-        private Button elementEditBtn;
 
         public SessionElementHolder(@NonNull View itemView) {
             super(itemView);
             elementType = itemView.findViewById(R.id.card_workout_element_type);
             elementDuration = itemView.findViewById(R.id.card_workout_element_duration);
-            elementEditBtn = itemView.findViewById(R.id.card_workout_element_edit_btn);
         }
     }
 }

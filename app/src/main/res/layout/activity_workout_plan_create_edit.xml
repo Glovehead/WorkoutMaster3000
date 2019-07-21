@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <EditText
         android:id="@+id/create_edit_workout_title_et"
@@ -12,11 +13,22 @@
         android:maxLines="1" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/create_edit_workout_recyclerview"
+        android:id="@+id/create_edit_workout_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="16dp"
-        android:layout_below="@id/create_edit_workout_title_et"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_below="@id/create_edit_workout_title_et"
+        android:layout_above="@id/fab_add_workout_session_element"
+        tools:listitem="@layout/cardview_workout_plan_element">
+    </androidx.recyclerview.widget.RecyclerView>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_workout_session_element"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_white_24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="32dp"/>
 
 </RelativeLayout>

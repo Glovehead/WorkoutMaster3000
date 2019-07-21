@@ -16,6 +16,7 @@ import glovehead.enterprises.workoutmaster3000.db.entity.WorkoutSessionPlan;
 
 public class WorkoutPlanSelectorAdapter extends RecyclerView.Adapter<WorkoutPlanSelectorAdapter.WorkoutPlanHolder> {
     private List<WorkoutSessionPlan> workoutSessionPlans = new ArrayList<>();
+    private OnItemClickListener listener;
 
     @NonNull
     @Override
@@ -35,7 +36,7 @@ public class WorkoutPlanSelectorAdapter extends RecyclerView.Adapter<WorkoutPlan
         }
         else {
             holder.workoutTitleTV.setText("-");
-            holder.workoutTypeTV.setText("Tap here to create plan");
+            holder.workoutTypeTV.setText("-");
             holder.workoutTotalTimeTV.setText("--:--:--");
         }
     }
@@ -60,7 +61,25 @@ public class WorkoutPlanSelectorAdapter extends RecyclerView.Adapter<WorkoutPlan
             workoutTitleTV = itemView.findViewById(R.id.card_workout_plan_title);
             workoutTypeTV = itemView.findViewById(R.id.card_workout_plan_type);
             workoutTotalTimeTV = itemView.findViewById(R.id.card_plan_duration);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(workoutSessionPlans.get(position));
+                    }
+                }
+            });
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(WorkoutSessionPlan workoutSessionPlan);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
 }

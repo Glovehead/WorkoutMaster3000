@@ -13,10 +13,20 @@ import glovehead.enterprises.workoutmaster3000.db.entity.WorkoutSessionElement;
 
 public class WorkoutPlanCreateEditViewModel extends AndroidViewModel {
 
-    DataRepository repository;
-    LiveData<List<WorkoutSessionElement>> workoutSessionElements;
+    private DataRepository repository;
+    private LiveData<List<WorkoutSessionElement>> workoutSessionElements;
+    private int workoutSessionID;
 
     public WorkoutPlanCreateEditViewModel(@NonNull Application application) {
         super(application);
+        repository = new DataRepository(application);
+    }
+
+    public LiveData<List<WorkoutSessionElement>> getWorkoutSessionElements() {
+        return workoutSessionElements;
+    }
+
+    public void setWorkoutSessionID(int workoutSessionID) {
+        this.workoutSessionID = workoutSessionID;
     }
 }
