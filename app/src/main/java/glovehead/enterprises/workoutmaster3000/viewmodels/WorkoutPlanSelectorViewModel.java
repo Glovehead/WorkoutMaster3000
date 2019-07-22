@@ -1,6 +1,7 @@
 package glovehead.enterprises.workoutmaster3000.viewmodels;
 
 import android.app.Application;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -24,5 +25,12 @@ public class WorkoutPlanSelectorViewModel extends AndroidViewModel {
 
     public LiveData<List<WorkoutSessionPlan>> getWorkoutSessionPlans() {
         return workoutSessionPlans;
+    }
+
+    public void deleteAllWorkoutPlans() {
+        for (WorkoutSessionPlan plan : workoutSessionPlans.getValue()) {
+            repository.deleteAllWorkoutSessionElements(plan.getId());
+            repository.deleteWorkoutSessionPlan(plan);
+        }
     }
 }

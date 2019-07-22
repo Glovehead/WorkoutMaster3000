@@ -2,6 +2,9 @@ package glovehead.enterprises.workoutmaster3000.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -67,4 +70,19 @@ public class WorkoutPlanSelectorActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.workout_plan_selector_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.workout_selector_menu_item_delete_all_workout_plans:
+                viewModel.deleteAllWorkoutPlans();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
