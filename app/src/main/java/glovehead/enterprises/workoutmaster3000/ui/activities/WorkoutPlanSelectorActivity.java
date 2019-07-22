@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -68,6 +69,9 @@ public class WorkoutPlanSelectorActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
+        setTitle("Select Workout");
     }
 
     @Override
@@ -82,7 +86,10 @@ public class WorkoutPlanSelectorActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.workout_selector_menu_item_delete_all_workout_plans:
                 viewModel.deleteAllWorkoutPlans();
+                Toast.makeText(this, "All workout plans deleted.", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 }

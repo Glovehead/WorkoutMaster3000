@@ -1,7 +1,11 @@
 package glovehead.enterprises.workoutmaster3000.ui.activities;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,5 +47,30 @@ public class WorkoutPlanCreateEditActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.workout_plan_create_edit_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.create_edit_workout_menu_save:
+                saveWorkout();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void saveWorkout() {
+        viewModel.saveWorkout();
+        Toast.makeText(this, "Workout saved", Toast.LENGTH_SHORT).show();
+        finish();
     }
 }

@@ -29,4 +29,7 @@ public class WorkoutPlanCreateEditViewModel extends AndroidViewModel {
     public void setWorkoutSessionID(int workoutSessionID) {
         this.workoutSessionID = workoutSessionID;
     }
+
+    public void saveWorkout() {
+    }
 }
