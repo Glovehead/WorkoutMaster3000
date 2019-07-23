@@ -41,10 +41,15 @@ public class WorkoutPlanElementsAdapter extends RecyclerView.Adapter<WorkoutPlan
 
     @Override
     public int getItemCount() {
-        return workoutSessionElements.size();
+        return workoutSessionElements != null ? workoutSessionElements.size() : 0;
     }
 
     public void setWorkoutSessionElements(List<WorkoutSessionElement> elements) {
+        this.workoutSessionElements = elements;
+        notifyDataSetChanged();
+    }
+
+    public void setWorkoutElements(List<WorkoutSessionElement> elements) {
         this.workoutSessionElements = elements;
         notifyDataSetChanged();
     }

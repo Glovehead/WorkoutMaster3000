@@ -5,7 +5,9 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import glovehead.enterprises.workoutmaster3000.DataRepository;
@@ -13,13 +15,19 @@ import glovehead.enterprises.workoutmaster3000.db.entity.WorkoutSessionElement;
 
 public class WorkoutPlanCreateEditViewModel extends AndroidViewModel {
 
+    private static final String TAG = "WorkoutPlanCreateEditViewModel";
+
     private DataRepository repository;
-    private LiveData<List<WorkoutSessionElement>> workoutSessionElements;
+    private MutableLiveData<List<WorkoutSessionElement>> workoutSessionElements = new MutableLiveData<>();
     private int workoutSessionID;
 
-    public WorkoutPlanCreateEditViewModel(@NonNull Application application) {
+    public WorkoutPlanCreateEditViewModel(@NonNull Application application, int workoutSessionID) {
         super(application);
+        this.workoutSessionID = workoutSessionID;
         repository = new DataRepository(application);
+
+        // Super hacky, fix later
+        workoutSessionElements.postValue(repository.getAllWorkoutSessionElements(workoutSessionID).getValue());
     }
 
     public LiveData<List<WorkoutSessionElement>> getWorkoutSessionElements() {

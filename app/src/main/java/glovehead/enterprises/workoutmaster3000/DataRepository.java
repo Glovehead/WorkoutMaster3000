@@ -4,6 +4,7 @@ import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
@@ -66,10 +67,11 @@ public class DataRepository {
         return exerciseTypeDao.getExerciseType(id);
     }
 
+
     // WorkoutSessionElements
 
-    public List<WorkoutSessionElement> getAllWorkoutSessionElements(int workoutSessionID) {
-        return workoutSessionElementDao.getAllSessionElements(workoutSessionID);
+    public LiveData<List<WorkoutSessionElement>> getAllWorkoutSessionElements(int workoutSessionID) {
+        return workoutSessionElementDao.getAllWorkoutSessionElements(workoutSessionID);
     }
 
     public void insertWorkoutSessionElement(WorkoutSessionElement element) {
@@ -132,6 +134,21 @@ public class DataRepository {
         }
     }
 
+    private static class getAllWorkoutSessionElementsAsyncTask extends AsyncTask<Integer, Void, Void> {
+
+        private WorkoutSessionElementDao dao;
+
+        getAllWorkoutSessionElementsAsyncTask(WorkoutSessionElementDao dao) {
+            this.dao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Integer... workoutSessionIDs) {
+            dao.getAllWorkoutSessionElements(workoutSessionIDs[0]);
+            return null;
+        }
+    }
+
     private static class insertWorkoutSessionElementAsyncTask extends AsyncTask<WorkoutSessionElement, Void, Void> {
 
         private WorkoutSessionElementDao dao;
@@ -145,6 +162,7 @@ public class DataRepository {
             dao.insert(workoutSessionElements[0]);
             return null;
         }
+
     }
 
     private static class deleteWorkoutSessionElementAsyncTask extends AsyncTask<WorkoutSessionElement, Void, Void> {

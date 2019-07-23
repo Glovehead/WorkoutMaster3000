@@ -1,6 +1,7 @@
 package glovehead.enterprises.workoutmaster3000.db.dao;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -23,5 +24,5 @@ public interface WorkoutSessionElementDao {
     void deleteAllWorkoutSessionElements(int workoutSessionID);
 
     @Query("SELECT * FROM workout_session_element WHERE workoutSessionID = :workoutSessionID ORDER BY position ASC")
-    List<WorkoutSessionElement> getAllSessionElements(int workoutSessionID);
+    LiveData<List<WorkoutSessionElement>> getAllWorkoutSessionElements(int workoutSessionID);
 }
