@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import glovehead.enterprises.workoutmaster3000.DataRepository;
+import glovehead.enterprises.workoutmaster3000.db.entity.ExerciseType;
 import glovehead.enterprises.workoutmaster3000.db.entity.WorkoutSessionElement;
 
 public class WorkoutPlanCreateEditViewModel extends AndroidViewModel {
@@ -19,6 +20,8 @@ public class WorkoutPlanCreateEditViewModel extends AndroidViewModel {
 
     private DataRepository repository;
     private MutableLiveData<List<WorkoutSessionElement>> workoutSessionElements = new MutableLiveData<>();
+    LiveData<List<ExerciseType>> exerciseTypes;
+    private List<String> exerciseTypeStrings;
     private int workoutSessionID;
 
     public WorkoutPlanCreateEditViewModel(@NonNull Application application, int workoutSessionID) {
@@ -28,6 +31,11 @@ public class WorkoutPlanCreateEditViewModel extends AndroidViewModel {
 
         // Super hacky, fix later
         workoutSessionElements.postValue(repository.getAllWorkoutSessionElements(workoutSessionID).getValue());
+
+        exerciseTypes = repository.getAllExerciseTypes();
+        for (ExerciseType exerciseType : exerciseTypes.getValue()) {
+            exerciseTypeStrings.add(exerciseType.getName());
+        }
     }
 
     public LiveData<List<WorkoutSessionElement>> getWorkoutSessionElements() {
@@ -39,5 +47,9 @@ public class WorkoutPlanCreateEditViewModel extends AndroidViewModel {
     }
 
     public void saveWorkout() {
+    }
+
+    public List<String> getElementTypeStrings() {
+        return null;
     }
 }

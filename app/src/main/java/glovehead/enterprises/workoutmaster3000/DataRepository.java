@@ -59,7 +59,7 @@ public class DataRepository {
 
     // ExerciseTypes
 
-    public List<ExerciseType> getAllExerciseTypes() {
+    public LiveData<List<ExerciseType>> getAllExerciseTypes() {
         return exerciseTypeDao.getAllExerciseTypes();
     }
 

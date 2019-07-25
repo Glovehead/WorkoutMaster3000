@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/dialog_workout_element_type_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Type: "
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
+    <Spinner
+        android:id="@+id/dialog_workout_element_type_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/dialog_workout_element_type_tv"
+        android:layout_alignBottom="@id/dialog_workout_element_type_tv">
+
+    </Spinner>
+
+    <NumberPicker
+        android:id="@+id/dialog_workout_element_minute_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_workout_element_type_tv">
+
+    </NumberPicker>
+
+    <TextView
+        android:id="@+id/dialog_workout_element_minute_second_buffer_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_alignTop="@+id/dialog_workout_element_minute_picker"
+        android:layout_alignBottom="@+id/dialog_workout_element_minute_picker"
+        android:layout_margin="16dp"
+
+
+        android:layout_toEndOf="@+id/dialog_workout_element_minute_picker"
+        android:text=":"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <NumberPicker
+        android:id="@+id/dialog_workout_element_second_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_workout_element_type_tv"
+        android:layout_toEndOf="@id/dialog_workout_element_minute_second_buffer_tv">
+
+    </NumberPicker>
+
+</RelativeLayout>

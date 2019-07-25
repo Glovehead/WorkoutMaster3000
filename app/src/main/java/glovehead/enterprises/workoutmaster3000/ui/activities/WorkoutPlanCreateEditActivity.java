@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -16,12 +17,15 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.List;
 
 import glovehead.enterprises.workoutmaster3000.Constants;
 import glovehead.enterprises.workoutmaster3000.R;
 import glovehead.enterprises.workoutmaster3000.db.entity.WorkoutSessionElement;
 import glovehead.enterprises.workoutmaster3000.ui.adapters.WorkoutPlanElementsAdapter;
+import glovehead.enterprises.workoutmaster3000.ui.fragments.WorkoutElementCreateEditFragment;
 import glovehead.enterprises.workoutmaster3000.viewmodels.WorkoutPlanCreateEditViewModel;
 import glovehead.enterprises.workoutmaster3000.viewmodels.factories.WorkoutPlanCreateEditModelFactory;
 
@@ -29,6 +33,8 @@ public class WorkoutPlanCreateEditActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private EditText workoutSessionTitleET;
+    private FloatingActionButton addElementFAB;
+
     private WorkoutPlanCreateEditViewModel viewModel;
 
     @Override
@@ -59,6 +65,14 @@ public class WorkoutPlanCreateEditActivity extends AppCompatActivity {
                 adapter.setWorkoutElements(workoutSessionElements);
             }
         });
+
+        addElementFAB = findViewById(R.id.fab_add_workout_session_element);
+        addElementFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialog();
+            }
+        });
     }
 
     @Override
@@ -78,6 +92,12 @@ public class WorkoutPlanCreateEditActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void openDialog() {
+        WorkoutElementCreateEditFragment dialog = new WorkoutElementCreateEditFragment();
+        dialog.show(getSupportFragmentManager(), "Create/Edit");
+
     }
 
     private void saveWorkout() {

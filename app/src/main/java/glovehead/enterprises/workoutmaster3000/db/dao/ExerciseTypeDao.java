@@ -1,5 +1,6 @@
 package glovehead.enterprises.workoutmaster3000.db.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -26,5 +27,5 @@ public interface ExerciseTypeDao {
     ExerciseType getExerciseType(int exerciseID);
 
     @Query("SELECT * FROM exercise_type")
-    List<ExerciseType> getAllExerciseTypes();
+    LiveData<List<ExerciseType>> getAllExerciseTypes();
 }
