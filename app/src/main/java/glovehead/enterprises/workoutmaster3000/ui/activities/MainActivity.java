@@ -12,8 +12,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.util.List;
+
 import glovehead.enterprises.workoutmaster3000.Constants;
 import glovehead.enterprises.workoutmaster3000.R;
+import glovehead.enterprises.workoutmaster3000.db.entity.ExerciseType;
 import glovehead.enterprises.workoutmaster3000.db.entity.WorkoutSessionPlan;
 import glovehead.enterprises.workoutmaster3000.viewmodels.MainActivityViewModel;
 
@@ -51,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     private void initViews() {

@@ -17,6 +17,7 @@ import glovehead.enterprises.workoutmaster3000.db.entity.WorkoutSessionElement;
 
 public class WorkoutPlanElementsAdapter extends RecyclerView.Adapter<WorkoutPlanElementsAdapter.SessionElementHolder> {
     private List<WorkoutSessionElement> workoutSessionElements = new ArrayList<>();
+    private OnItemClickListener listener;
 
     @NonNull
     @Override
@@ -63,6 +64,28 @@ public class WorkoutPlanElementsAdapter extends RecyclerView.Adapter<WorkoutPlan
             super(itemView);
             elementType = itemView.findViewById(R.id.card_workout_element_type);
             elementDuration = itemView.findViewById(R.id.card_workout_element_duration);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        listener.OnItemClicked(workoutSessionElements.get(position));
+                    }
+                }
+            });
         }
     }
+
+    public WorkoutSessionElement getElementAt(int position) {
+        return this.workoutSessionElements.get(position);
+    }
+
+    public interface  OnItemClickListener {
+        void OnItemClicked(WorkoutSessionElement element);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
 }

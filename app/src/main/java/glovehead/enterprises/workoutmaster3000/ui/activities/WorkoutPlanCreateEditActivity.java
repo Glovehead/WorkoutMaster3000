@@ -2,10 +2,12 @@ package glovehead.enterprises.workoutmaster3000.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ import glovehead.enterprises.workoutmaster3000.viewmodels.WorkoutPlanCreateEditV
 import glovehead.enterprises.workoutmaster3000.viewmodels.factories.WorkoutPlanCreateEditModelFactory;
 
 public class WorkoutPlanCreateEditActivity extends AppCompatActivity {
+    private static final String TAG = "CreateEditActivity";
 
     private RecyclerView recyclerView;
     private EditText workoutSessionTitleET;
@@ -66,6 +69,13 @@ public class WorkoutPlanCreateEditActivity extends AppCompatActivity {
             }
         });
 
+        adapter.setOnItemClickListener(new WorkoutPlanElementsAdapter.OnItemClickListener() {
+            @Override
+            public void OnItemClicked(WorkoutSessionElement element) {
+                openDialog(element.getPosition(), element.getMinutes(), element.getSeconds());
+            }
+        });
+
         addElementFAB = findViewById(R.id.fab_add_workout_session_element);
         addElementFAB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +83,7 @@ public class WorkoutPlanCreateEditActivity extends AppCompatActivity {
                 openDialog();
             }
         });
+
     }
 
     @Override
@@ -97,11 +108,33 @@ public class WorkoutPlanCreateEditActivity extends AppCompatActivity {
     private void openDialog() {
         WorkoutElementCreateEditFragment dialog = new WorkoutElementCreateEditFragment();
         dialog.show(getSupportFragmentManager(), "Create/Edit");
+    }
 
+    private void openDialog(int position, int minutes, int seconds) {
+        WorkoutElementCreateEditFragment dialog = new WorkoutElementCreateEditFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constants.EXTRA_EXERCISE_TYPE_POSITION, position);
+        bundle.putInt(Constants.EXTRA_ELEMENT_DURATION_MINUTES, minutes);
+        bundle.putInt(Constants.EXTRA_ELEMENT_DURATION_SECONDS, seconds);
+        dialog.setArguments(bundle);
+        dialog.show(getSupportFragmentManager(), "Create/Edit");
     }
 
     private void saveWorkout() {
-        viewModel.saveWorkout();
+
+        if (viewModel.getWorkoutSessionElements().getValue() == null) {
+            Toast.makeText(this, "Please add workout elements", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String title = workoutSessionTitleET.getText().toString();
+        if (title.trim().equals("")) {
+            Toast.makeText(this, "Please enter valid title", Toast.LENGTH_SHORT).show();
+            return;
+
+        }
+
+        viewModel.saveWorkout(title);
         Toast.makeText(this, "Workout saved", Toast.LENGTH_SHORT).show();
         finish();
     }

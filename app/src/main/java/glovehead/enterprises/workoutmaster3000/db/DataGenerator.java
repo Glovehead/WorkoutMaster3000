@@ -1,6 +1,7 @@
 package glovehead.enterprises.workoutmaster3000.db;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import glovehead.enterprises.workoutmaster3000.db.dao.ExerciseTypeDao;
 import glovehead.enterprises.workoutmaster3000.db.entity.ExerciseType;
@@ -8,6 +9,7 @@ import glovehead.enterprises.workoutmaster3000.db.entity.ExerciseType;
 public class DataGenerator extends AsyncTask<Void, Void, Void> {
 
     private ExerciseTypeDao exerciseTypeDao;
+    private static final String TAG = "DataGenerator";
 
     public DataGenerator(AppDatabase db) {
         exerciseTypeDao = db.exerciseTypeDao();
@@ -15,6 +17,7 @@ public class DataGenerator extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... voids) {
+        Log.d(TAG, "doInBackground: Data about to insert");
         // rest
         exerciseTypeDao.insert(new ExerciseType("Rest", 0, 0, 0));
 

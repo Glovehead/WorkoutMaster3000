@@ -28,4 +28,7 @@ public interface WorkoutSessionPlanDao {
 
     @Query("SELECT * FROM workout_session_plan WHERE isActive")
     LiveData<WorkoutSessionPlan> getActiveWorkoutSessionPlan();
+
+    @Query("SELECT * FROM workout_session_plan WHERE id = :id")
+    LiveData<WorkoutSessionPlan> getWorkoutSessionPlan(int id);
 }

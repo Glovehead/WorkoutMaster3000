@@ -24,6 +24,7 @@ public class DataRepository {
 
     private LiveData<List<WorkoutSessionPlan>> allWorkoutSessionPlans;
     private LiveData<WorkoutSessionPlan> activeWorkoutSessionPlan;
+    private LiveData<List<ExerciseType>> exerciseTypes;
 
     public DataRepository(Application application) {
         AppDatabase db = AppDatabase.getInstance(application);
@@ -33,9 +34,14 @@ public class DataRepository {
 
         allWorkoutSessionPlans = workoutSessionPlanDao.getAllWorkoutSessionPlans();
         activeWorkoutSessionPlan = workoutSessionPlanDao.getActiveWorkoutSessionPlan();
+        exerciseTypes = exerciseTypeDao.getAllExerciseTypes();
     }
 
     // WorkoutSessionPlans
+
+    public LiveData<WorkoutSessionPlan> getWorkoutSessionPlan(int id) {
+        return workoutSessionPlanDao.getWorkoutSessionPlan(id);
+    }
 
     public LiveData<List<WorkoutSessionPlan>> getAllWorkoutSessionPlans() {
         return allWorkoutSessionPlans;
@@ -60,11 +66,15 @@ public class DataRepository {
     // ExerciseTypes
 
     public LiveData<List<ExerciseType>> getAllExerciseTypes() {
-        return exerciseTypeDao.getAllExerciseTypes();
+        return exerciseTypes;
     }
 
     public ExerciseType getExerciseType(int id) {
         return exerciseTypeDao.getExerciseType(id);
+    }
+
+    public void insertExerciseType(ExerciseType exerciseType) {
+
     }
 
 
@@ -193,5 +203,21 @@ public class DataRepository {
             dao.deleteAllWorkoutSessionElements(integers[0]);
             return null;
         }
+    }
+
+    private static class insertExerciseTypeAsyncTask extends AsyncTask<ExerciseType, Void, Void> {
+
+        private ExerciseTypeDao dao;
+
+        insertExerciseTypeAsyncTask(ExerciseTypeDao dao) {
+            this.dao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(ExerciseType... exerciseTypes) {
+            dao.insert(exerciseTypes[0]);
+            return null;
+        }
+
     }
 }

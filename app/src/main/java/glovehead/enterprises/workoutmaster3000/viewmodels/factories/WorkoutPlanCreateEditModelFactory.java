@@ -15,6 +15,8 @@ public class WorkoutPlanCreateEditModelFactory extends ViewModelProvider.Android
 
     public WorkoutPlanCreateEditModelFactory(@NonNull Application application, int extra) {
         super(application);
+        this.application = application;
+        this.extra = extra;
     }
 
     @NonNull
